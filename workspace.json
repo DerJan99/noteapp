@@ -8,6 +8,16 @@
       "root": "apps/stencil-frontend",
       "sourceRoot": "apps/stencil-frontend/src",
       "projectType": "application",
+      "architect": {
+        "build-tailwind-css": {
+          "builder": "@nrwl/workspace:run-commands",
+          "outputs": [],
+          "options": {
+            "command": "node ..\\..\\node_modules\\.bin\\postcss src\\styles.css -o src\\app\\tailwind.css",
+            "cwd": "apps\\stencil-frontend"
+          }
+        }
+      },
       "generators": {
         "@nxext/stencil:component": {
           "style": "scss",
