@@ -23,7 +23,8 @@
     "update": "nx migrate latest",
     "workspace-generator": "nx workspace-generator",
     "dep-graph": "nx dep-graph",
-    "help": "nx help"
+    "help": "nx help",
+    "postinstall": "exitzero electron-builder install-app-deps"
   },
   "private": true,
   "dependencies": {
@@ -33,7 +34,9 @@
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^4.0.3",
     "@nrwl/cli": "12.2.0",
+    "@nrwl/eslint-plugin-nx": "12.2.0",
     "@nrwl/jest": "12.2.0",
+    "@nrwl/linter": "12.2.0",
     "@nrwl/tao": "12.2.0",
     "@nrwl/workspace": "12.2.0",
     "@nxext/stencil": "^11.3.3",
@@ -49,6 +52,10 @@
     "autoprefixer": "^10.2.5",
     "cssnano": "^5.0.2",
     "dotenv": "8.2.0",
+    "electron": "^11.3.0",
+    "eslint": "7.22.0",
+    "eslint-config-prettier": "8.1.0",
+    "exitzero": "^1.0.1",
     "jest": "26.2.2",
     "nx-electron": "^11.1.1",
     "postcss-replace": "^1.1.3",
