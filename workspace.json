@@ -1,10 +1,125 @@
 {
-  
-  
   "version": 2,
-  
-  "projects": {},
   "cli": {
-    "defaultCollection": "@nrwl/workspace"
+    "defaultCollection": "@nxext/stencil"
+  },
+  "projects": {
+    "stencil-frontend": {
+      "root": "apps/stencil-frontend",
+      "sourceRoot": "apps/stencil-frontend/src",
+      "projectType": "application",
+      "generators": {
+        "@nxext/stencil:component": {
+          "style": "scss",
+          "storybook": false
+        }
+      },
+      "targets": {
+        "build": {
+          "executor": "@nxext/stencil:build",
+          "options": {
+            "projectType": "application",
+            "configPath": "apps/stencil-frontend/stencil.config.ts",
+            "outputPath": "dist/apps/stencil-frontend"
+          },
+          "outputs": [
+            "{options.outputPath}"
+          ],
+          "configurations": {
+            "production": {
+              "dev": false
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nxext/stencil:build",
+          "options": {
+            "projectType": "application",
+            "configPath": "apps/stencil-frontend/stencil.config.ts",
+            "outputPath": "dist/apps/stencil-frontend",
+            "serve": true,
+            "watch": true
+          },
+          "outputs": [
+            "{options.outputPath}"
+          ]
+        },
+        "test": {
+          "executor": "@nxext/stencil:test",
+          "options": {
+            "projectType": "application",
+            "configPath": "apps/stencil-frontend/stencil.config.ts",
+            "outputPath": "dist/apps/stencil-frontend"
+          },
+          "outputs": [
+            "{options.outputPath}"
+          ]
+        },
+        "e2e": {
+          "executor": "@nxext/stencil:e2e",
+          "options": {
+            "projectType": "application",
+            "configPath": "apps/stencil-frontend/stencil.config.ts",
+            "outputPath": "dist/apps/stencil-frontend"
+          },
+          "outputs": [
+            "{options.outputPath}"
+          ]
+        }
+      }
+    },
+    "-presentation--noteapp": {
+      "root": "libs//presentation//noteapp",
+      "sourceRoot": "libs//presentation//noteapp/src",
+      "projectType": "library",
+      "targets": {
+        "build": {
+          "executor": "@nxext/stencil:build",
+          "outputs": [
+            "{options.outputPath}"
+          ],
+          "options": {
+            "projectType": "library",
+            "configPath": "libs/presentation/noteapp/stencil.config.ts",
+            "outputPath": "dist/libs/presentation/noteapp"
+          },
+          "configurations": {
+            "production": {
+              "dev": false
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nxext/stencil:build",
+          "outputs": [
+            "{options.outputPath}"
+          ],
+          "options": {
+            "projectType": "library",
+            "configPath": "libs/presentation/noteapp/stencil.config.ts",
+            "outputPath": "dist/libs/presentation/noteapp",
+            "serve": true,
+            "watch": true
+          }
+        },
+        "e2e": {
+          "executor": "@nxext/stencil:e2e",
+          "outputs": [
+            "{options.outputPath}"
+          ],
+          "options": {
+            "projectType": "library",
+            "configPath": "libs/presentation/noteapp/stencil.config.ts",
+            "outputPath": "dist/libs/presentation/noteapp"
+          }
+        }
+      },
+      "generators": {
+        "@nxext/stencil:component": {
+          "style": "scss",
+          "storybook": false
+        }
+      }
+    }
   }
 }
