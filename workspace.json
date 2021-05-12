@@ -8,6 +8,16 @@
       "root": "apps/stencil-frontend",
       "sourceRoot": "apps/stencil-frontend/src",
       "projectType": "application",
+      "architect": {
+        "build-tailwind-css": {
+          "builder": "@nrwl/workspace:run-commands",
+          "outputs": [],
+          "options": {
+            "command": "node ..\\..\\node_modules\\.bin\\postcss src\\styles.css -o src\\app\\tailwind.css",
+            "cwd": "apps\\stencil-frontend"
+          }
+        }
+      },
       "generators": {
         "@nxext/stencil:component": {
           "style": "scss",
@@ -120,6 +130,80 @@
           "storybook": false
         }
       }
+    },
+    "electron-app": {
+      "root": "apps/electron-app",
+      "sourceRoot": "apps/electron-app/src",
+      "projectType": "application",
+      "prefix": "electron-app",
+      "targets": {
+        "build": {
+          "executor": "nx-electron:build",
+          "options": {
+            "outputPath": "dist/apps/electron-app",
+            "main": "apps/electron-app/src/main.ts",
+            "tsConfig": "apps/electron-app/tsconfig.app.json",
+            "assets": [
+              "apps/electron-app/src/assets"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/electron-app/src/environments/environment.ts",
+                  "with": "apps/electron-app/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "nx-electron:execute",
+          "options": {
+            "buildTarget": "electron-app:build"
+          }
+        },
+        "package": {
+          "executor": "nx-electron:package",
+          "options": {
+            "name": "electron-app",
+            "frontendProject": "stencil-frontend",
+            "outputPath": "dist/packages",
+            "prepackageOnly": true
+          }
+        },
+        "make": {
+          "executor": "nx-electron:make",
+          "options": {
+            "name": "electron-app",
+            "frontendProject": "stencil-frontend",
+            "outputPath": "dist/executables"
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/electron-app/**/*.ts"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/apps/electron-app"
+          ],
+          "options": {
+            "jestConfig": "apps/electron-app/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
-  }
+  },
+  "defaultProject": "electron-app"
 }

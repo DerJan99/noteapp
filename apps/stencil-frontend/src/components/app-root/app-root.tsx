@@ -24,7 +24,7 @@ export class AppRoot {
             </stencil-route-switch>
           </stencil-router>
 
-          <my-component></my-component>
+          <my-component first="Stencil" middle="don't call me an" last="Framework"></my-component>
         </main>
       </div>
     );
